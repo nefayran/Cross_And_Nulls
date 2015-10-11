@@ -1,0 +1,13 @@
+C:\Users\Rodion\Desktop\Cross_And_Nulls\Cross_And_Nulls\bin\Debug\Cross_And_Nulls.exe.config
+C:\Users\Rodion\Desktop\Cross_And_Nulls\Cross_And_Nulls\bin\Debug\Cross_And_Nulls.exe
+C:\Users\Rodion\Desktop\Cross_And_Nulls\Cross_And_Nulls\bin\Debug\Cross_And_Nulls.pdb
+C:\Users\Rodion\Desktop\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\Cross_And_Nulls.csprojResolveAssemblyReference.cache
+C:\Users\Rodion\Desktop\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\MainWindow.baml
+C:\Users\Rodion\Desktop\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\MainWindow.g.cs
+C:\Users\Rodion\Desktop\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\App.g.cs
+C:\Users\Rodion\Desktop\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\Cross_And_Nulls_MarkupCompile.cache
+C:\Users\Rodion\Desktop\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\Cross_And_Nulls.g.resources
+C:\Users\Rodion\Desktop\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\Cross_And_Nulls.Properties.Resources.resources
+C:\Users\Rodion\Desktop\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\Cross_And_Nulls.csproj.GenerateResource.Cache
+C:\Users\Rodion\Desktop\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\Cross_And_Nulls.exe
+C:\Users\Rodion\Desktop\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\Cross_And_Nulls.pdb
