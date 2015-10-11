@@ -3,7 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button x:Name="StartEvo" Content="Start Evolution" HorizontalAlignment="Left" Margin="159,146,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="StartEvo_Click"/>
+        <Button x:Name="StartEvo" Content="Start Evolution" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="StartEvo_Click"/>
+        <Label x:Name="label_1" Content="[  ]" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_2" Content="[  ]" HorizontalAlignment="Left" Margin="79,62,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_3" Content="[  ]" HorizontalAlignment="Left" Margin="148,62,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_4" Content="[  ]" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_5" Content="[  ]" HorizontalAlignment="Left" Margin="79,93,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_6" Content="[  ]" HorizontalAlignment="Left" Margin="148,93,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_7" Content="[  ]" HorizontalAlignment="Left" Margin="10,124,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_8" Content="[  ]" HorizontalAlignment="Left" Margin="79,124,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_9" Content="[  ]" HorizontalAlignment="Left" Margin="148,124,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_winner" Content="Winner" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

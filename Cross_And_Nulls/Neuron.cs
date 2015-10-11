@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cross_And_Nulls
 {
-    class Neuron
+    public class Neuron
     {
         public double[] inputs;//Вход
         public double[] weights;//Веса
@@ -30,14 +30,14 @@ namespace Cross_And_Nulls
             }
         }
         //Генерация случайных весов
-        public void randomizeWeights(Random rnd)
+        public void randomizeWeights()
         {
             for (int i = 0; i < n; i++)
             {
                 
-                weights[i] = 0.5 - rnd.NextDouble();
+                weights[i] = 1 - Program.rnd.NextDouble();
             }
-            biasWeight = 0.5 - rnd.NextDouble();
+            biasWeight = 1 - Program.rnd.NextDouble();
         }
       
     }
