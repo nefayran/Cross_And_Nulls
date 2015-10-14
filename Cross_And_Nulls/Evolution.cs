@@ -8,33 +8,21 @@ namespace Cross_And_Nulls
 {
     public class Evolution
     {
-        int n = 4;//Размер поколения
+        public int n;//Размер поколения
         public List<Perseptron> PersiList;//Список особей
         public int[] X;//Доска
-        public Evolution()
+        public Evolution(int N)
         {
+            n = N;
             PersiList = new List<Perseptron>();
-            Born();
             X = new int[]{ 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            //Каждый играет с каждым
-            int m = 0;
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = m; j < n; j++)
-                {
-                    if(i!=j)
-                    Game(PersiList[i], PersiList[j]);
-                }
-                m++;  
-            }
-            int q = 0;
         }
         //Функция рождения первго поколения
         public void Born()
         {
             for (int i = 0; i < n; i++)
             {
-                Perseptron persi = new Perseptron();
+                Perseptron persi = new Perseptron(10);
                 persi.Initialization();
                 PersiList.Add(persi);
             }
@@ -47,9 +35,7 @@ namespace Cross_And_Nulls
             persi_2.game++;
             //Выбираем стороны
             persi_1.Fraction = 1;//Нолики
-            persi_2.Fraction = -1;//Крестики
-            //Обнуляем состояние доски
-            X = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            persi_2.Fraction = -1;//Крестики           
             for (int i = 0; i < 9; i++)
             {
                 X = persi_1.GameStep(X);
@@ -125,11 +111,77 @@ namespace Cross_And_Nulls
             //---------------------------------------------
             return WinFraction;
         }
-        //Функция селекции
-        public void Selection(Perseptron persi_1, Perseptron persi_2)
+        //Функция селекции, после неё остается половина поколения!
+        public void Selection()
         {
-            //Program.rnd
-            //persi_1.in1.weights[]
+            //Каждый играет с каждым
+            int m = 0;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = m; j < n; j++)
+                {
+                    //Обнуляем состояние доски
+                    X = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                    if (i != j)
+                        Game(PersiList[i], PersiList[j]);
+                }
+                m++;
+            }
+            //Кол-во особей для скрещивания
+            int z = (int)Math.Ceiling((decimal)n / 2);
+            //Сортируем особи по кол-ву побед, от слабого к сильному
+            PersiList.Sort(delegate (Perseptron persi_1, Perseptron persi_2)
+            { return persi_1.WinCounter.CompareTo(persi_2.WinCounter); });
+            //Отсеиваем половину поколения
+            for (int i = 0; i < z-1; i++)
+                PersiList.Remove(PersiList.First());
+            n = z;
         }
+        //Функция выбирающая случайный ответ из предложенных вариантов
+        private int Change(int a,int b)
+        {
+            bool change = Convert.ToBoolean(Program.rnd.Next(-1, 1));
+            if (change)
+                return a;
+            else return b;
+        }
+        //Функция скрещивания, скрещивает всех особей по принципу: 
+        //слабый-><-сильный = новый
+        //В результате популяция уменьшается в два раза, или увеличивается в 1 раз, (upPopulation = true)
+        public void Crossbreeding(bool upPopulation)
+        {
+            //Новое поколение
+            List<Perseptron> NewPersiList = new List<Perseptron>();
+            //Скрещиваем слабый-><-сильный = новый
+            for (int i = 0; i < n/2; i++)
+            {
+                Perseptron persi = new Perseptron(10);
+                //Скрещиваем скрытые нейроны
+                for (int j = 0; j < 9; j++)
+                {
+                    for (int m = 0; m < 10; m++)
+                        persi.InvisibleNeurons[m].weights[j] = PersiList[Change(i, n - i - 1)].InvisibleNeurons[m].weights[j];                
+                }
+                for (int m = 0; m < 10; m++)
+                    persi.InvisibleNeurons[m].biasWeight = PersiList[Change(i, n - i - 1)].InvisibleNeurons[m].biasWeight;
+                //Скрещиваем выходные нейроны
+                for (int j = 0; j < 3; j++)
+                    persi.on.weights[j] = PersiList[Change(i, n - i - 1)].on.weights[j];
+                persi.on.biasWeight = PersiList[Change(i, n - i - 1)].on.biasWeight;
+                //Добавляем новую особь в список
+                NewPersiList.Add(persi);
+            }
+            if (upPopulation)
+                for (int i = 0; i < n / 2; i++)
+                    PersiList.Add(NewPersiList[i]);
+            else
+            {
+                PersiList.Clear();
+                n /= 2;
+                for (int i = 0; i < n; i++)
+                    PersiList.Add(NewPersiList[i]);
+            }
+        }
+        //Функция Мутации 
     }
 }
