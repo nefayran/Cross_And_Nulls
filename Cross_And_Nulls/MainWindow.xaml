@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="246.078" Width="212.255">
     <Grid Margin="0,0,2,1">
-        <Button x:Name="StartEvo" Content="Start Evolution" HorizontalAlignment="Left" Margin="51,8,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="StartEvo_Click"/>
+        <Button x:Name="StartEvo" Content="Evolution" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="86" Height="24" Click="StartEvo_Click"/>
         <Button x:Name="label_1" Content="[  ]" HorizontalAlignment="Left" Margin="17,75,0,0" VerticalAlignment="Top" Click="Step" Width="18" Height="20"/>
         <Button x:Name="label_2" Content="[  ]" HorizontalAlignment="Left" Margin="86,75,0,0" VerticalAlignment="Top" Click="Step" Width="18" Height="20"/>
         <Button x:Name="label_3" Content="[  ]" HorizontalAlignment="Left" Margin="155,75,0,0" VerticalAlignment="Top" Click="Step" Width="18" Height="20"/>
@@ -14,7 +14,8 @@
         <Button x:Name="label_8" Content="[  ]" HorizontalAlignment="Left" Margin="86,137,0,0" VerticalAlignment="Top" Click="Step" Width="18" Height="20"/>
         <Button x:Name="label_9" Content="[  ]" HorizontalAlignment="Left" Margin="155,137,0,0" VerticalAlignment="Top" Click="Step" Width="18" Height="20"/>
         <Label x:Name="label_winner" Content="Winner" HorizontalAlignment="Left" Margin="74,178,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label" Content="Ваш ход" HorizontalAlignment="Left" Margin="67,46,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+        <Label x:Name="label" Content="-------------------" HorizontalAlignment="Left" Margin="44,44,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+        <Button x:Name="Clear_button" Content="Clear" HorizontalAlignment="Left" Margin="101,10,0,0" VerticalAlignment="Top" Width="91" Height="24" Click="Clear_button_Click"/>
 
     </Grid>
 </Window>

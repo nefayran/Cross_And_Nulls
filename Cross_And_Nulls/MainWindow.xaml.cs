@@ -31,24 +31,24 @@ namespace Cross_And_Nulls
         Evolution Evo;
         private void StartEvo_Click(object sender, RoutedEventArgs e)
         {
-            Evo = new Evolution(91);
-            //Рождение первого поколения
-            Evo.Born();
+            Evo = new Evolution(99*2);
+            Evo.Born(99*2);
             //Проводим селекцию
-            while(Evo.n!=1)
-            { 
+            while (Evo.PersiList.Count != 1)
+            {
                 Evo.Selection();
-                Evo.Crossbreeding(true);
+                Evo.Crossbreeding(false);
             }
-            int u = 0;
+            int q = 0;
+            
         }
 
         private void Step(object sender, RoutedEventArgs e)
         {
-            Evo.PersiList[Evo.PersiList.Count - 1].Fraction = -1;
+            Evo.PersiList[Evo.PersiList.Count-1].Fraction = 1;
             string[] Marks = new string[9];
             Button label = (Button)sender;
-            label.Content = "O";
+            label.Content = "X";
             label.IsEnabled = false;
             //            
             Marks[0] = Convert.ToString(label_1.Content);
@@ -66,6 +66,7 @@ namespace Cross_And_Nulls
                 if (Marks[i] == "X")
                     X[i] = -1;
                 else if (Marks[i] == "O") X[i] = 1;
+                else Marks[i] = 0; 
             }
             X = Evo.PersiList[Evo.PersiList.Count-1].GameStep(X);
             //
@@ -84,6 +85,29 @@ namespace Cross_And_Nulls
             label_8.Content = Marks[7];
             label_9.Content = Marks[8];
             label_winner.Content = Evo.WinController(X);
+        }
+
+        private void Clear_button_Click(object sender, RoutedEventArgs e)
+        {
+            label_1.Content = "[  ]";
+            label_2.Content = "[  ]";
+            label_3.Content = "[  ]";
+            label_4.Content = "[  ]";
+            label_5.Content = "[  ]";
+            label_6.Content = "[  ]";
+            label_7.Content = "[  ]";
+            label_8.Content = "[  ]";
+            label_9.Content = "[  ]";
+
+            label_1.IsEnabled = true;
+            label_2.IsEnabled = true;
+            label_3.IsEnabled = true;
+            label_4.IsEnabled = true;
+            label_5.IsEnabled = true;
+            label_6.IsEnabled = true;
+            label_7.IsEnabled = true;
+            label_8.IsEnabled = true;
+            label_9.IsEnabled = true;
         }
     }
 }

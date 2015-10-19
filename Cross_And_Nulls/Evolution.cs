@@ -18,24 +18,24 @@ namespace Cross_And_Nulls
             X = new int[]{ 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         }
         //Функция рождения первго поколения
-        public void Born()
+        public void Born(int l)
         {
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < l; i++)
             {
-                Perseptron persi = new Perseptron(10);
+                Perseptron persi = new Perseptron(3);
                 persi.Initialization();
                 PersiList.Add(persi);
             }
         }
         //Функция игры
-        public int Game(Perseptron persi_1, Perseptron persi_2)
+        public int Game(Perseptron persi_1, Perseptron persi_2, int f1, int f2)
         {
             int winner = 0;
             persi_1.game++;
             persi_2.game++;
             //Выбираем стороны
-            persi_1.Fraction = 1;//Нолики
-            persi_2.Fraction = -1;//Крестики           
+            persi_1.Fraction = f1;
+            persi_2.Fraction = f2;         
             for (int i = 0; i < 9; i++)
             {
                 X = persi_1.GameStep(X);
@@ -49,8 +49,16 @@ namespace Cross_And_Nulls
             }
             if (winner == persi_1.Fraction) persi_1.WinCounter++;
             if (winner == persi_2.Fraction) persi_2.WinCounter++;
-            //Обнуляем фракции
-            persi_1.Fraction = 0;
+
+            //
+            //Ищем пустые ячейки
+            int k = 0;//Кол-во пустых ячеек        
+            for (int i = 0; i < 9; i++)
+                if (X[i] == 0)
+                    k++;
+            if (winner == 0 & k == 0) { persi_1.WinCounter += 0.5; persi_2.WinCounter += 0.5; }
+                //Обнуляем фракции
+                persi_1.Fraction = 0;
             persi_2.Fraction = 0;
             return winner;
         }
@@ -123,7 +131,20 @@ namespace Cross_And_Nulls
                     //Обнуляем состояние доски
                     X = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
                     if (i != j)
-                        Game(PersiList[i], PersiList[j]);
+                        Game(PersiList[i], PersiList[j],1,-1);
+                }
+                m++;
+            }
+            //
+            m = 0;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = m; j < n; j++)
+                {
+                    //Обнуляем состояние доски
+                    X = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                    if (i != j)
+                        Game(PersiList[i], PersiList[j], -1, 1);
                 }
                 m++;
             }
@@ -159,20 +180,20 @@ namespace Cross_And_Nulls
                 //Скрещиваем скрытые нейроны
                 for (int j = 0; j < 9; j++)
                 {
-                    for (int m = 0; m < 10; m++)
+                    for (int m = 0; m < PersiList[0].InvisibleNeurons.Count; m++)
                         persi.InvisibleNeurons[m].weights[j] = PersiList[Change(i, n - i - 1)].InvisibleNeurons[m].weights[j];                
                 }
-                for (int m = 0; m < 10; m++)
+                for (int m = 0; m < PersiList[0].InvisibleNeurons.Count; m++)
                     persi.InvisibleNeurons[m].biasWeight = PersiList[Change(i, n - i - 1)].InvisibleNeurons[m].biasWeight;
                 //Скрещиваем выходные нейроны
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < PersiList[0].InvisibleNeurons.Count; j++)
                     persi.on.weights[j] = PersiList[Change(i, n - i - 1)].on.weights[j];
                 persi.on.biasWeight = PersiList[Change(i, n - i - 1)].on.biasWeight;
                 //Добавляем новую особь в список
                 NewPersiList.Add(persi);
             }
             if (upPopulation)
-                for (int i = 0; i < n / 2; i++)
+                for (int i = 0; i < n/2; i++)
                     PersiList.Add(NewPersiList[i]);
             else
             {
@@ -181,7 +202,16 @@ namespace Cross_And_Nulls
                 for (int i = 0; i < n; i++)
                     PersiList.Add(NewPersiList[i]);
             }
+            int q = 0;
         }
         //Функция Мутации 
+        public void Mutation()
+        {
+            for (int i = 0; i < PersiList.Count-1; i++)
+                for (int m = 0;m < PersiList[0].InvisibleNeurons.Count-1; m++)
+                    for (int j = 0; j < 9; j++)
+                    PersiList[Program.rnd.Next(0, PersiList.Count - 1)].InvisibleNeurons[m].weights[j] += 0.01 - Program.rnd.NextDouble()*0.01;
+
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace Cross_And_Nulls
         public int n;//Кол-во скрытых нейронов
         public Neuron on;//Выходной нейрон
         public int Fraction = 0;//Сторона
-        public int WinCounter = 0;//Счетчик побед
+        public double WinCounter = 0;//Счетчик побед
         public int game = 0;//Счетчик игр
         public List<Neuron> InvisibleNeurons = new List<Neuron>();//Список скрытых нейронов
         public Perseptron(int N)//n-Кол-во скрытых нейронов

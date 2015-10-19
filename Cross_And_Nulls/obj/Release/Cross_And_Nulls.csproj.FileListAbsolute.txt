@@ -1,0 +1,12 @@
+C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\bin\Release\Cross_And_Nulls.exe.config
+C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\bin\Release\Cross_And_Nulls.exe
+C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\bin\Release\Cross_And_Nulls.pdb
+C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\obj\Release\MainWindow.baml
+C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\obj\Release\MainWindow.g.cs
+C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\obj\Release\App.g.cs
+C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\obj\Release\Cross_And_Nulls_MarkupCompile.cache
+C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\obj\Release\Cross_And_Nulls.g.resources
+C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\obj\Release\Cross_And_Nulls.Properties.Resources.resources
+C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\obj\Release\Cross_And_Nulls.csproj.GenerateResource.Cache
+C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\obj\Release\Cross_And_Nulls.exe
+C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\obj\Release\Cross_And_Nulls.pdb

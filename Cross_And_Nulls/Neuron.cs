@@ -26,7 +26,7 @@ namespace Cross_And_Nulls
                 double s = 0;
                 for (int i = 0; i < n; i++)
                     s += weights[i] * inputs[i];
-                return Function.F(s + biasWeight); 
+                return Function.F(s+ biasWeight); 
             }
         }
         //Генерация случайных весов
@@ -35,9 +35,9 @@ namespace Cross_And_Nulls
             for (int i = 0; i < n; i++)
             {
                 
-                weights[i] = 5 - Program.rnd.NextDouble()*5;
+                weights[i] = 0.5 - Program.rnd.NextDouble()*0.5;
             }
-            biasWeight = 5 - Program.rnd.NextDouble()*5;
+            biasWeight = 0.5 - Program.rnd.NextDouble()*0.5;
         }
       
     }
