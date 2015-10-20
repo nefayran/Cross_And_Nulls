@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Cross_And_Nulls
 {
     /*
-     * Класс реализующий систему 
+     * Класс реализующий систему
      * Состоит из 3 скрытых нейронов
      * и 1 выходного нейрона
      */
@@ -18,15 +18,18 @@ namespace Cross_And_Nulls
         public int Fraction = 0;//Сторона
         public double WinCounter = 0;//Счетчик побед
         public int game = 0;//Счетчик игр
-        public List<Neuron> InvisibleNeurons = new List<Neuron>();//Список скрытых нейронов
+        public List<Neuron> InvisibleNeurons_1 = new List<Neuron>();//Список скрытых нейронов 1 слоя
+        public List<Neuron> InvisibleNeurons_2 = new List<Neuron>();//Список скрытых нейронов 2 слоя
         public Perseptron(int N)//n-Кол-во скрытых нейронов
         {
             n = N;
             //Создание нейронов
             for (int i = 0; i < n; i++)
             {
-                Neuron InvisibleNeuron = new Neuron(9);
-                InvisibleNeurons.Add(InvisibleNeuron);
+                Neuron InvisibleNeuron_1 = new Neuron(9);
+                InvisibleNeurons_1.Add(InvisibleNeuron_1);
+                Neuron InvisibleNeuron_2 = new Neuron(n);
+                InvisibleNeurons_2.Add(InvisibleNeuron_2);
             }
             on = new Neuron(n);
         }
@@ -34,7 +37,10 @@ namespace Cross_And_Nulls
         {
             // Генерируем веса
             for (int i = 0; i < n; i++)
-                InvisibleNeurons[i].randomizeWeights();
+            {
+                InvisibleNeurons_1[i].randomizeWeights();
+                InvisibleNeurons_2[i].randomizeWeights();
+            }
             on.randomizeWeights();
         }
         //Функция просчета хода
@@ -76,8 +82,9 @@ namespace Cross_And_Nulls
                         steps[j] = Save[j];
                     for (int u = 0; u < n; u++)
                     {
-                        InvisibleNeurons[u].inputs = steps;
-                        on.inputs[u] = InvisibleNeurons[u].outs;
+                        InvisibleNeurons_1[u].inputs = steps;
+                        InvisibleNeurons_2[u].inputs[u] = InvisibleNeurons_1[u].outs;
+                        on.inputs[u] = InvisibleNeurons_2[u].outs;
                     }
                     //Считаем результативность хода и запоминаем доску
                     if (on.outs > step)

@@ -26,7 +26,7 @@ namespace Cross_And_Nulls
                 double s = 0;
                 for (int i = 0; i < n; i++)
                     s += weights[i] * inputs[i];
-                return Function.F(s+ biasWeight); 
+                return Function.F(s);//biasWeight); 
             }
         }
         //Генерация случайных весов
@@ -35,9 +35,9 @@ namespace Cross_And_Nulls
             for (int i = 0; i < n; i++)
             {
                 
-                weights[i] = 0.5 - Program.rnd.NextDouble()*0.5;
+                weights[i] = 0.5 - Program.rnd.NextDouble();
             }
-            biasWeight = 0.5 - Program.rnd.NextDouble()*0.5;
+            biasWeight = 0.5 - Program.rnd.NextDouble();
         }
       
     }
@@ -48,6 +48,13 @@ namespace Cross_And_Nulls
         public static double F(double x)
         {
             return 1.0 / (1.0 + Math.Exp(-x));
+        }
+        //Пороговая функция
+        public static double Fp(double x)
+        {
+            if (x > 0.5)
+                return 1.0;
+            else return 0;
         }
     }
 }

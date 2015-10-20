@@ -13,9 +13,10 @@
         <Button x:Name="label_7" Content="[  ]" HorizontalAlignment="Left" Margin="17,137,0,0" VerticalAlignment="Top" Click="Step" Width="18" Height="20"/>
         <Button x:Name="label_8" Content="[  ]" HorizontalAlignment="Left" Margin="86,137,0,0" VerticalAlignment="Top" Click="Step" Width="18" Height="20"/>
         <Button x:Name="label_9" Content="[  ]" HorizontalAlignment="Left" Margin="155,137,0,0" VerticalAlignment="Top" Click="Step" Width="18" Height="20"/>
-        <Label x:Name="label_winner" Content="Winner" HorizontalAlignment="Left" Margin="74,178,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label" Content="-------------------" HorizontalAlignment="Left" Margin="44,44,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+        <Label x:Name="label_winner" Content="Winner" HorizontalAlignment="Left" Margin="123,178,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label" Content="-------------------" HorizontalAlignment="Left" Margin="17,178,0,0" VerticalAlignment="Top" IsEnabled="False"/>
         <Button x:Name="Clear_button" Content="Clear" HorizontalAlignment="Left" Margin="101,10,0,0" VerticalAlignment="Top" Width="91" Height="24" Click="Clear_button_Click"/>
+        <Button x:Name="GoGame" Content="Game" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Width="86" Height="24" Click="GoGame_Click"/>
 
     </Grid>
 </Window>
