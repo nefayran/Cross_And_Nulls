@@ -222,13 +222,22 @@ namespace Cross_And_Nulls
                     PersiList.Add(NewPersiList[i]);
             }
         }
-        //Функция Мутации (неправильно)
-        public void Mutation()
+        //Функция Мутации
+        public void Mutation(double chance)//chance 0 - 1
         {
-            for (int i = 0; i < PersiList.Count-1; i++)
-                for (int m = 0;m < Neurons-1; m++)
+            double ThisChance = Program.rnd.NextDouble();
+            int RndPersi = Program.rnd.Next(0,n);
+            if (ThisChance > chance)//Проводим мутацию если шанс достигнут
+            {
+                for (int m = 0; m < Neurons; m++)
                     for (int j = 0; j < 9; j++)
-                    PersiList[Program.rnd.Next(0, PersiList.Count - 1)].InvisibleNeurons_1[m].weights[j] += 0.01 - Program.rnd.NextDouble()*0.01;
+                    {
+                        PersiList[RndPersi].InvisibleNeurons_1[m].weights[j] += 0.3 - Program.rnd.NextDouble() * 0.6;
+                        PersiList[RndPersi].InvisibleNeurons_2[m].weights[j] += 0.3 - Program.rnd.NextDouble() * 0.6;
+                    }
+                for (int j = 0; j < 9; j++)
+                    PersiList[RndPersi].on.weights[j] += 0.3 - Program.rnd.NextDouble() * 0.6;
+            }
 
         }
         //Функция выбирающая случайный ответ из предложенных вариантов

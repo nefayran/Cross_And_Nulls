@@ -27,6 +27,7 @@ namespace Cross_And_Nulls
         Evolution Evo;
         System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
         bool StepController = true;//Первыми ходят нолики
+        int YouFraction = 0;//Твоя фракция
         public MainWindow()
         {
             InitializeComponent();
@@ -91,40 +92,35 @@ namespace Cross_And_Nulls
         {
             List<double> K = new List<double>();
             Evo = new Evolution(10);
-            int n = 20;//Устойчивый n*2
+            int n = Convert.ToInt32(StartBorn.Text);//Устойчивый n*2
             Evo.Born(n);
             K.Add(0);
             int i = 0;
-            /*while(Evo.K < 0.8)
-            { 
-                Evo.Crossbreeding(true);
-                Evo.Selection(n+n/2);
-                Evo.Born(n/2);                
-                K.Add(Evo.K);
-                i++;
-                if (i > 50) break;
-            }*/
             while (Evo.K < 0.95)
             {
-                Evo.Crossbreeding(false);
-                Evo.Selection(n/2);
-                Evo.Born(n / 2);
+                Evo.Crossbreeding(true);
+                Evo.Selection(Evo.n / 2);
+                Evo.Mutation(Convert.ToInt32(MutationPercent.Text)/100.0);
                 K.Add(Evo.K);
                 i++;
-                if (i > 200) break;
+                if (i > Convert.ToInt32(СyclesCount.Text)) break;
             }
-            Evo.Selection(n-2);
-            //K.Sort();
-            
+            Evo.Selection(n-2);//Итоговый турнир
+            Cross.IsEnabled = true;
+            Null.IsEnabled = true;
+            GoGame.IsEnabled = true;
+            Clear_button.IsEnabled = true;
             int q = 0;          
         }
 
         private void Step(object sender, RoutedEventArgs e)
         {
-            Evo.PersiList[Evo.PersiList.Count-1].Fraction = 1;
+            Evo.PersiList[Evo.PersiList.Count-1].Fraction = -YouFraction;
             string[] Marks = new string[9];
             Button label = (Button)sender;
-            label.Content = "X";
+            if(YouFraction == 1)
+                label.Content = "O";
+            else label.Content = "X";
             label.IsEnabled = false;
             //            
             Marks[0] = Convert.ToString(label_1.Content);
@@ -162,7 +158,46 @@ namespace Cross_And_Nulls
             label_9.Content = Marks[8];
             label_winner.Content = Evo.WinController(X);
         }
-
+        private void Step()
+        {
+            Evo.PersiList[Evo.PersiList.Count - 1].Fraction = -YouFraction;
+            string[] Marks = new string[9];
+            //            
+            Marks[0] = Convert.ToString(label_1.Content);
+            Marks[1] = Convert.ToString(label_2.Content);
+            Marks[2] = Convert.ToString(label_3.Content);
+            Marks[3] = Convert.ToString(label_4.Content);
+            Marks[4] = Convert.ToString(label_5.Content);
+            Marks[5] = Convert.ToString(label_6.Content);
+            Marks[6] = Convert.ToString(label_7.Content);
+            Marks[7] = Convert.ToString(label_8.Content);
+            Marks[8] = Convert.ToString(label_9.Content);
+            int[] X = new int[9];
+            for (int i = 0; i < 9; i++)
+            {
+                if (Marks[i] == "X")
+                    X[i] = -1;
+                else if (Marks[i] == "O") X[i] = 1;
+            }
+            X = Evo.PersiList[Evo.PersiList.Count - 1].GameStep(X);
+            //
+            for (int i = 0; i < 9; i++)
+            {
+                if (X[i] == 1) Marks[i] = "O";
+                else if (X[i] == -1) Marks[i] = "X";
+                else X[i] = 0;
+            }
+            label_1.Content = Marks[0];
+            label_2.Content = Marks[1];
+            label_3.Content = Marks[2];
+            label_4.Content = Marks[3];
+            label_5.Content = Marks[4];
+            label_6.Content = Marks[5];
+            label_7.Content = Marks[6];
+            label_8.Content = Marks[7];
+            label_9.Content = Marks[8];
+            label_winner.Content = Evo.WinController(X);
+        }
         private void Clear_button_Click(object sender, RoutedEventArgs e)
         {
             label_1.Content = "[  ]";
@@ -175,6 +210,42 @@ namespace Cross_And_Nulls
             label_8.Content = "[  ]";
             label_9.Content = "[  ]";
 
+            label_1.IsEnabled = false;
+            label_2.IsEnabled = false;
+            label_3.IsEnabled = false;
+            label_4.IsEnabled = false;
+            label_5.IsEnabled = false;
+            label_6.IsEnabled = false;
+            label_7.IsEnabled = false;
+            label_8.IsEnabled = false;
+            label_9.IsEnabled = false;
+        }
+
+        private void GoGame_Click(object sender, RoutedEventArgs e)
+        {
+            Evo.PersiList[0].Fraction = 1;
+            Evo.PersiList[1].Fraction = -1;
+            timer.Start();
+        }
+
+        private void Null_Click(object sender, RoutedEventArgs e)
+        {
+            YouFraction = 1;
+            Step();
+            label_1.IsEnabled = true;
+            label_2.IsEnabled = true;
+            label_3.IsEnabled = true;
+            label_4.IsEnabled = true;
+            label_5.IsEnabled = true;
+            label_6.IsEnabled = true; 
+            label_7.IsEnabled = true;
+            label_8.IsEnabled = true;
+            label_9.IsEnabled = true;
+        }
+
+        private void Cross_Click(object sender, RoutedEventArgs e)
+        {
+            YouFraction = -1;
             label_1.IsEnabled = true;
             label_2.IsEnabled = true;
             label_3.IsEnabled = true;
@@ -184,15 +255,6 @@ namespace Cross_And_Nulls
             label_7.IsEnabled = true;
             label_8.IsEnabled = true;
             label_9.IsEnabled = true;
-        }
-
-        private void GoGame_Click(object sender, RoutedEventArgs e)
-        {
-            //Evo = new Evolution(5);
-            //Evo.Born(2);
-            Evo.PersiList[0].Fraction = 1;
-            Evo.PersiList[1].Fraction = -1;
-            timer.Start();
         }
     }
 }
