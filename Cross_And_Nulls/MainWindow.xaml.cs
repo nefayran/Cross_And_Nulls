@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.ComponentModel;
 namespace Cross_And_Nulls
 {
     public static class Program
@@ -26,13 +26,21 @@ namespace Cross_And_Nulls
     {
         Evolution Evo;
         System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
+        private BackgroundWorker backgroundWorker;//Фоновый поток
         bool StepController = true;//Первыми ходят нолики
         int YouFraction = 0;//Твоя фракция
+        int iter = 0;
+        double Mp = 0;
+        int n = 0;
         public MainWindow()
         {
             InitializeComponent();
             timer.Interval = TimeSpan.FromMilliseconds(1000);
             timer.Tick += Tick;
+            backgroundWorker = new BackgroundWorker();
+            iter = Convert.ToInt32(СyclesCount.Text);
+            Mp = Convert.ToInt32(MutationPercent.Text) / 100.0;
+            n = Convert.ToInt32(StartBorn.Text);//Устойчивый n*2
         }
         //Пусть играют сами с собой
         public void Tick(object sender, EventArgs e)
@@ -90,29 +98,64 @@ namespace Cross_And_Nulls
         }                   
         private void StartEvo_Click(object sender, RoutedEventArgs e)
         {
-            List<double> K = new List<double>();
-            Evo = new Evolution(10);
-            int n = Convert.ToInt32(StartBorn.Text);//Устойчивый n*2
+            n = Convert.ToInt32(StartBorn.Text);//Устойчивый n*2
+            Evo = new Evolution(3);           
             Evo.Born(n);
-            K.Add(0);
-            int i = 0;
-            while (Evo.K < 0.95)
+            iter = Convert.ToInt32(СyclesCount.Text);
+            Mp = Convert.ToInt32(MutationPercent.Text) / 100.0;
+            StartEvo.IsEnabled = false;
+            Cross.IsEnabled = false;
+            Null.IsEnabled = false;
+            GoGame.IsEnabled = false;
+            Clear_button.IsEnabled = false;
+            //Поток
+            backgroundWorker.DoWork += new DoWorkEventHandler(bgw_DoWork);
+            backgroundWorker.ProgressChanged += new ProgressChangedEventHandler(bgw_ProgressChanged);
+            backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgw_RunWorkerCompleted);
+            backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.RunWorkerAsync();
+
+        }
+        void bgw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            List<double> K = new List<double>();
+            /*for (int i = 0; i < iter; i++)
             {
+                Evo.Selection(Evo.n / 2);
+                Evo.Crossbreeding(false);
+                Evo.Born(n - n/4);
+                Evo.Mutation(Mp);
+                int prog = i *100 / iter;
+                K.Add(Evo.K);
+                backgroundWorker.ReportProgress(prog);
+            }*/
+            for (int i = 0; i < iter; i++)
+            {
+                Evo.NullsCounters();
                 Evo.Crossbreeding(true);
                 Evo.Selection(Evo.n / 2);
-                Evo.Mutation(Convert.ToInt32(MutationPercent.Text)/100.0);
+                Evo.Born(Evo.n/3);
+                Evo.Mutation(Mp);
+                int prog = i *100 / iter;
                 K.Add(Evo.K);
-                i++;
-                if (i > Convert.ToInt32(СyclesCount.Text)) break;
+                backgroundWorker.ReportProgress(prog);
             }
-            Evo.Selection(n-2);//Итоговый турнир
+            int q = 0;
+        }
+        void bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Loader.Value = e.ProgressPercentage;
+        }
+        void bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Evo.Selection(Evo.PersiList.Count - 2);//Итоговый турнир
+            //Включение интерфейса
             Cross.IsEnabled = true;
             Null.IsEnabled = true;
             GoGame.IsEnabled = true;
             Clear_button.IsEnabled = true;
-            int q = 0;          
+            StartEvo.IsEnabled = true;
         }
-
         private void Step(object sender, RoutedEventArgs e)
         {
             Evo.PersiList[Evo.PersiList.Count-1].Fraction = -YouFraction;

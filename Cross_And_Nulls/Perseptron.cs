@@ -20,6 +20,7 @@ namespace Cross_And_Nulls
         public int game = 0;//Счетчик игр
         public List<Neuron> InvisibleNeurons_1 = new List<Neuron>();//Список скрытых нейронов 1 слоя
         public List<Neuron> InvisibleNeurons_2 = new List<Neuron>();//Список скрытых нейронов 2 слоя
+        public List<Neuron> InvisibleNeurons_3 = new List<Neuron>();//Список скрытых нейронов 3 слоя
         public Perseptron(int N)//n-Кол-во скрытых нейронов
         {
             n = N;
@@ -30,6 +31,8 @@ namespace Cross_And_Nulls
                 InvisibleNeurons_1.Add(InvisibleNeuron_1);
                 Neuron InvisibleNeuron_2 = new Neuron(n);
                 InvisibleNeurons_2.Add(InvisibleNeuron_2);
+                Neuron InvisibleNeuron_3 = new Neuron(n);
+                InvisibleNeurons_3.Add(InvisibleNeuron_3);
             }
             on = new Neuron(n);
         }
@@ -38,8 +41,9 @@ namespace Cross_And_Nulls
             // Генерируем веса
             for (int i = 0; i < n; i++)
             {
-                InvisibleNeurons_1[i].randomizeWeights();
+                InvisibleNeurons_1[i].randomizeWeights();                
                 InvisibleNeurons_2[i].randomizeWeights();
+                InvisibleNeurons_3[i].randomizeWeights();
             }
             on.randomizeWeights();
         }
@@ -84,7 +88,8 @@ namespace Cross_And_Nulls
                     {
                         InvisibleNeurons_1[u].inputs = steps;
                         InvisibleNeurons_2[u].inputs[u] = InvisibleNeurons_1[u].outs;
-                        on.inputs[u] = InvisibleNeurons_2[u].outs;
+                        InvisibleNeurons_3[u].inputs[u] = InvisibleNeurons_2[u].outs;
+                        on.inputs[u] = InvisibleNeurons_3[u].outs;
                     }
                     //Считаем результативность хода и запоминаем доску
                     if (on.outs > step)
