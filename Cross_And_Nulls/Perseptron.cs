@@ -85,18 +85,21 @@ namespace Cross_And_Nulls
                     for (int j = 0; j < 9; j++)
                         steps[j] = Save[j];
                     for (int u = 0; u < n; u++)
-                    {
                         InvisibleNeurons_1[u].inputs = steps;
-                        InvisibleNeurons_2[u].inputs[u] = InvisibleNeurons_1[u].outs;
-                        InvisibleNeurons_3[u].inputs[u] = InvisibleNeurons_2[u].outs;
+                    for (int u = 0; u < n; u++)
+                        for (int p = 0; p < n; p++)
+                            InvisibleNeurons_2[u].inputs[p] = InvisibleNeurons_1[p].outs;
+                    for (int u = 0; u < n; u++)
+                        for (int p = 0; p < n; p++)
+                            InvisibleNeurons_3[u].inputs[p] = InvisibleNeurons_2[p].outs;
+                    for (int u = 0; u < n; u++)
                         on.inputs[u] = InvisibleNeurons_3[u].outs;
-                    }
-                    //Считаем результативность хода и запоминаем доску
-                    if (on.outs > step)
-                        {
-                         step = on.outs;
-                         Array.Copy(Save, y, 9);
-                        }
+                            //Считаем результативность хода и запоминаем доску
+                            if (on.outs > step)
+                            {
+                             step = on.outs;
+                             Array.Copy(Save, y, 9);
+                            }
                     //Возвращаем исходное состояние
                     Array.Copy(x, Save, 9);
                 }
