@@ -89,7 +89,7 @@ namespace Cross_And_Nulls
             }
             if (winner == persi_1.Fraction) persi_1.WinCounter++;
             else if (winner == persi_2.Fraction) persi_2.WinCounter++;
-            //else if (winner == 0) { persi_1.WinCounter -= 0.5; persi_2.WinCounter -= 0.5; }
+            //else if (winner == 0) { persi_1.WinCounter += 0.5; persi_2.WinCounter += 0.5; }
                 //Обнуляем фракции
                 persi_1.Fraction = 0;
             persi_2.Fraction = 0;
@@ -164,7 +164,7 @@ namespace Cross_And_Nulls
                     //Обнуляем состояние доски
                     X = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
                     if (i != j)
-                        Game(PersiList[i], PersiList[j],1,-1);
+                        Game(PersiList[i], PersiList[j],-1,1);
                 }
                 m++;
             }
@@ -177,10 +177,11 @@ namespace Cross_And_Nulls
                     //Обнуляем состояние доски
                     X = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
                     if (i != j)
-                        Game(PersiList[i], PersiList[j], -1, 1);
+                        Game(PersiList[i], PersiList[j], 1, -1);
                 }
                 m++;
             }
+            m = 0;
             //---------------------------Далее отбор-------------------
             //Сортируем особи по кол-ву побед, от слабого к сильному
             PersiList.Sort(delegate (Perseptron persi_1, Perseptron persi_2)

@@ -119,7 +119,7 @@ namespace Cross_And_Nulls
         void bgw_DoWork(object sender, DoWorkEventArgs e)
         {
             List<double> K = new List<double>();
-            /*for (int i = 0; i < iter; i++)
+           for (int i = 0; i < iter; i++)
             {
                 Evo.Selection(Evo.n / 2);
                 Evo.Crossbreeding(false);
@@ -128,7 +128,7 @@ namespace Cross_And_Nulls
                 int prog = i *100 / iter;
                 K.Add(Evo.K);
                 backgroundWorker.ReportProgress(prog);
-            }*/
+            }
             for (int i = 0; i < iter; i++)
             {
                 Evo.NullsCounters();
@@ -141,6 +141,7 @@ namespace Cross_And_Nulls
                 backgroundWorker.ReportProgress(prog);
             }
             int q = 0;
+            
         }
         void bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {

@@ -29,7 +29,6 @@ C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_
 C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\Cross_And_Nulls.pdb
 C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\bin\Debug\Cross_And_Nulls.exe
 C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\bin\Debug\Cross_And_Nulls.pdb
-C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\Cross_And_Nulls.csprojResolveAssemblyReference.cache
 C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\MainWindow.baml
 C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\MainWindow.g.cs
 C:\Users\Rodion\Documents\Visual Studio 2015\Projects\Cross_And_Nulls\Cross_And_Nulls\obj\Debug\App.g.cs

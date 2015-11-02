@@ -35,7 +35,7 @@ namespace Cross_And_Nulls
             for (int i = 0; i < n; i++)
             {
                 
-                weights[i] = 0.5 - Program.rnd.NextDouble();
+                weights[i] = 0.5-Program.rnd.NextDouble();
             }
             biasWeight = 0.5 - Program.rnd.NextDouble();
         }
